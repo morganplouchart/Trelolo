@@ -65,7 +65,6 @@ var socket ;
 document.body.onload = evt => {
   let userName = document.cookie.replace(/(?:(?:^|.*;\s*)loggedIn\s*\=\s*([^;]*).*$)|^.*$/, "$1");
   if(userName) {
-//    document.getElementById('username').innerText = userName ;
     loadTables () ;
   }
   socket = io('http://localhost:8000');

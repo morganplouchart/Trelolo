@@ -42,9 +42,8 @@ mongo.connect(url, (err, client) => {
         content: req.body.content,
         date:new Date()}, (err, result) => {
         if(err) throw err ;
-        sockets.sendAll(req.session.user._id, 'table', result.insertedId)
       })
-      
+
   })
 
 })

@@ -2,11 +2,11 @@
 
 {% block body %}
     <div class="container-fluid">
-      <div class="row">
-      <div class="col" id="text-index">
+      <div class="row" style="margin-top:5%;">
+      <div class="col-5" id="text-index">
         <h1>Avec Trelolo, vous pouvez ajouter et sauvegarder des tableaux, et c'est trés rigolo :).</h1>
       </div>
-      <div class="col">
+      <div class="col-7">
       <div class="row justify-content-md-center" id="loginArea" style="{{ user and user._id ? 'display:none' : '' }}">
       <form action="/users/login" method="post" class="col-12 col-md-6 mb-5" id="login-form" onsubmit="submitForm.bind(this)(event)">
         <div class="input-group mb-3">

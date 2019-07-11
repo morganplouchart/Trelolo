@@ -10,15 +10,10 @@ mongo.connect(url, (err, client) => {
   }
   const db = client.db('trelolo') ;
 
-  /* GET users listing. */
   router.get('/', function(req, res, next) {
     res.send('respond with a resource');
   });
   router.post('/login', (req, res, next) => {
-    // req.body.login
-    // req.body.password
-
-    // vérifie les login & password
     db.collection('users').findOne({
       $and:[
         {password : req.body.password},
@@ -28,7 +23,7 @@ mongo.connect(url, (err, client) => {
         ]}]}, (err, resp) => {
       if (err) throw err ;
       if(resp && resp._id) {
-        // Create COOKIES !
+
         req.session.user = resp ;
         console.log(req.session.user)
         res.cookie('loggedIn', req.session.user.username) ;
@@ -41,11 +36,6 @@ mongo.connect(url, (err, client) => {
     })
   });
   router.post('/create', (req, res, next) => {
-    // req.body.username
-    // req.body.email
-    // req.body.password
-
-    // ajout un utilisateur en BDD
     db.collection('users').insertOne(req.body, (err, resp) => {
       if(resp.insertedId) {
         req.session.user = req.body ;
