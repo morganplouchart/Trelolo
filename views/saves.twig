@@ -1,0 +1,12 @@
+{% for save in saves %}
+<div class="card tweet mb-3 w-100" style="width: 18rem;">
+    <div class="card-header">
+        <h5>{{ save.username }}</h5>
+        <span class="text-muted tweetDate">{{ save.date | date('d/m/Y H:i:s') }}</span>
+    </div>
+    <div class="card-body">
+        <p class="carcreate tabled-text">{{ save.name }}</p>
+        <p class="carcreate tabled-text">{{ save.content }}</p>
+    </div>
+</div>
+{% endfor %}

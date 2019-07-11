@@ -11,9 +11,11 @@
 </head>
 <body>
 <header class="row no-gutters">
-  <h1 class="col-10">{{ title }}</h1>
-  <div class="col-2 pseudoFrame">
+  <h1 class="col-2">{{ title }}</h1>
+  <div class="col-10 pseudoFrame">
     <span id="username">{{ user.username | default('userName') }}</span>
+    <a href="/saves/list" id="save" onclick="loadTablesSave(event)">Liste des tableaux sauvegarder</a>
+    <a href="/" id="createTable">Créer</a>
     <a href="/users/logout" id="logout" style="{{ user and user._id ?: 'display:none' }}" onclick="logout(event)">log out</a>
   </div>
 </header>
@@ -24,5 +26,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="/javascripts/app.js"></script>
+<script>
+document.getElementById('save').style.display = 'none' ;
+document.getElementById('createTable').style.display = 'none' ;
+</script>
 </body>
 </html>

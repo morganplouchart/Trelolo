@@ -13,8 +13,17 @@ mongo.connect(url, (err, client) => {
   }
   const db = client.db('trelolo');
 
+  router.get("/list", (req,res) => {
+    db.collection('saves').find().toArray(function(err, data) {
+      if (err) {
+        throw err;
+      }
+      res.render('saves', {saves: data});
+    })
+  });
+
   router.post('/', (req, res) => {
-    db.collection('save')
+    db.collection('saves')
       .insertOne({
         name : req.body.table,
         id : req.session.user._id,
@@ -23,7 +32,7 @@ mongo.connect(url, (err, client) => {
         content: req.body.content},
         (err, result) => {
         if(err) throw err ;
-        sockets.sendAll(req.session.user._id, 'save', result.insertedId)
+        sockets.sendAll(req.session.user._id, 'saves', result.insertedId)
         res.redirect('/tables')
       })
   })

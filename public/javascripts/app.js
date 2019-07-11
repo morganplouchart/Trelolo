@@ -11,11 +11,6 @@ function submitForm(evt) {
   for (var i in els) {
     if(!els[i].type ||!els[i].name)
       continue ;
-    if(els[i].type && ['radio', 'checkbox'].indexOf(els[i].type) !=-1) {
-      if(!els[i].checked) {
-        continue ;
-      }
-    }
     if (!!els[i].value)
       datas[els[i].name] = els[i].value ;
   }
@@ -33,6 +28,7 @@ function submitForm(evt) {
         document.getElementById('tableArea').style.display = '' ;
         document.getElementById('logout').style.display = '' ;
         document.getElementById('text-index').style.display = 'none' ;
+        document.getElementById('save').style.display = '' ;
         document.getElementById('username').innerText = document.cookie.replace(/(?:(?:^|.*;\s*)loggedIn\s*\=\s*([^;]*).*$)|^.*$/, "$1");
         return loadTables() ;
       }
@@ -45,10 +41,25 @@ function submitForm(evt) {
 
 function loadTables () {
   fetch('/tables', {method:"GET", credentials:'same-origin'}).then(r => r.text()).then(response => {
-    //console.log(response)
     document.getElementById('tableList').innerHTML = response;
+    document.getElementById('loginArea').style.display = 'none' ;
+    document.getElementById('tableArea').style.display = '' ;
+    document.getElementById('logout').style.display = '' ;
+    document.getElementById('text-index').style.display = 'none' ;
+    document.getElementById('save').style.display = '' ;
   });
 }
+
+function loadTablesSave (event) {
+  event.stopPropagation();
+  event.preventDefault();
+  fetch(event.target.href, {method:"GET", credentials:'same-origin'}).then(r => r.text()).then(response => {
+   $("#tableList").html(response);
+   document.getElementById('createTable').style.display = '' ;
+   document.getElementById('save').style.display = 'none' ;
+  });
+}
+
 var socket ;
 
 document.body.onload = evt => {
@@ -67,6 +78,8 @@ document.body.onload = evt => {
     });
   });
 }
+
+
 function logout (event) {
   event.stopPropagation();
   event.preventDefault();
@@ -76,6 +89,22 @@ function logout (event) {
       document.getElementById('loginArea').style.display = '' ;
       document.getElementById('tableArea').style.display = 'none' ;
       document.getElementById('logout').style.display = 'none' ;
+      document.getElementById('save').style.display = 'none' ;
+      document.getElementById('username').innerText = 'userName' ;
+      document.getElementById('text-index').style.display = '' ;
+    })
+} ;
+
+function deleteTable (event) {
+  event.stopPropagation();
+  event.preventDefault();
+  fetch('/tables/:id', {method:'DELETE',credentials:'same-origin'})
+    .then(r=>r.text())
+    .then(r=>{
+      document.getElementById('loginArea').style.display = '' ;
+      document.getElementById('tableArea').style.display = 'none' ;
+      document.getElementById('logout').style.display = 'none' ;
+      document.getElementById('save').style.display = 'none' ;
       document.getElementById('username').innerText = 'userName' ;
       document.getElementById('text-index').style.display = '' ;
     })

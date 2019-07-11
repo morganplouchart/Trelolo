@@ -24,11 +24,12 @@ mongo.connect(url, (err, client) => {
   });
 
   router.get('/:id', (req, res) => {
-    db.collection('tables')
-      .findOne({id : {$ne : req.session.user._id}, _id : new ObjectId(req.params.id)}, (err, table) => {
-        res.render('tables', {tables : [table]}, (err, html) => {
-          res.json({response : html})
-        })
+    db.collection('tables').findById({id : {$ne : req.session.user._id}, _id : new ObjectId(req.params.id)}, (err, data) => {
+      if (!err) {
+            return res.send('tables deleted!');
+        } else {
+            return res.send('Error deleting tables!');
+        }
     })
   });
 
