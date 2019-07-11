@@ -19,7 +19,7 @@
     <a href="/users/logout" id="logout" style="{{ user and user._id ?: 'display:none' }}" onclick="logout(event)">log out</a>
   </div>
 </header>
-<main class="container" style="dislpay:flex;">
+<main class="container">
     {% block body %}{% endblock %}
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>

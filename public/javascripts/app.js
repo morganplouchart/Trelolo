@@ -109,3 +109,18 @@ function deleteTable (event) {
       document.getElementById('text-index').style.display = '' ;
     })
 } ;
+
+function deleteSave (event) {
+  event.stopPropagation();
+  event.preventDefault();
+  fetch('/saves/:id', {method:'DELETE',credentials:'same-origin'})
+    .then(r=>r.text())
+    .then(r=>{
+      document.getElementById('loginArea').style.display = '' ;
+      document.getElementById('tableArea').style.display = 'none' ;
+      document.getElementById('logout').style.display = 'none' ;
+      document.getElementById('save').style.display = 'none' ;
+      document.getElementById('username').innerText = 'userName' ;
+      document.getElementById('text-index').style.display = '' ;
+    })
+} ;

@@ -8,5 +8,6 @@
         <p class="carcreate tabled-text">{{ save.name }}</p>
         <p class="carcreate tabled-text">{{ save.content }}</p>
     </div>
+      <a href="/saves/{{save._id}}" class="btn btn-warning btn-lg btn-block" onclick="deleteSave()">Delete</a>
 </div>
 {% endfor %}

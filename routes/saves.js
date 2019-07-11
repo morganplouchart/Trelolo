@@ -28,14 +28,23 @@ mongo.connect(url, (err, client) => {
         name : req.body.table,
         id : req.session.user._id,
         username : req.session.user.username,
-        date:new Date(),
-        content: req.body.content},
+        date:new Date()},
         (err, result) => {
         if(err) throw err ;
         sockets.sendAll(req.session.user._id, 'saves', result.insertedId)
         res.redirect('/tables')
       })
   })
+
+  router.get('/:id', (req, res) => {
+    db.collection('saves').remove({_id : new ObjectId(req.params.id)}, (err, data) => {
+      if (!err) {
+            return res.redirect("/saves/list")
+        } else {
+            return res.send('Error deleting table!');
+        }
+    })
+  });
 
 })
 

@@ -24,11 +24,11 @@ mongo.connect(url, (err, client) => {
   });
 
   router.get('/:id', (req, res) => {
-    db.collection('tables').findById({id : {$ne : req.session.user._id}, _id : new ObjectId(req.params.id)}, (err, data) => {
+    db.collection('tables').remove({_id : new ObjectId(req.params.id)}, (err, data) => {
       if (!err) {
-            return res.send('tables deleted!');
+            return res.redirect("/")
         } else {
-            return res.send('Error deleting tables!');
+            return res.send('Error deleting table!');
         }
     })
   });
@@ -39,11 +39,12 @@ mongo.connect(url, (err, client) => {
         name : req.body.table,
         id : req.session.user._id,
         username : req.session.user.username,
+        content: req.body.content,
         date:new Date()}, (err, result) => {
         if(err) throw err ;
         sockets.sendAll(req.session.user._id, 'table', result.insertedId)
-        res.send('ADDED')
       })
+      
   })
 
 })

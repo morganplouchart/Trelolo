@@ -7,12 +7,12 @@
     </div>
     <div class="card-body">
         <p class="carcreate tabled-text">{{ table.name }}</p>
-        <textarea rows="10" cols="60" id="content" name="content"></textarea>
+        <textarea rows="10" cols="60" id="content" name="content">{{ table.content }}</textarea>
 
         <form method="POST" action="/saves">
           <button type="submit" class="btn btn-primary btn-lg btn-block">sauvegarder</button>
         </form>
-        <form method="GET" action='/id:{{table._id}}'><button type="submit" class="btn btn-warning btn-lg btn-block" onclick="deleteTable()">Supprimer</button></form>
+        <a href="/tables/{{table._id}}" class="btn btn-warning btn-lg btn-block" onclick="deleteTable()">Delete</a>
     </div>
 </div>
 {% endfor %}
