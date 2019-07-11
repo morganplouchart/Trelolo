@@ -1,0 +1,69 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <div class="container">
+      <div class="row">
+      <div class="col" id="text-index">
+        <h1>Avec Trelolo, vous pouvez collaborer davantage et accomplir toujours plus de choses.</h1>
+      </div>
+      <div class="col">
+      <div class="row justify-content-md-center" id="loginArea" style="{{ user and user._id ? 'display:none' : '' }}">
+      <form action="/users/login" method="post" class="col-12 col-md-6 mb-5" id="login-form" onsubmit="submitForm.bind(this)(event)">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" for="login-login" id="login-login-aria">username/email</span>
+          </div>
+          <input type="text" class="form-control" placeholder="username/email" aria-label="username/email" aria-describedby="login-login-aria" id="login-login" name="login">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" for="password-login" id="password-login-aria">Password</span>
+          </div>
+          <input type="password" class="form-control" placeholder="Password" aria-label="password" aria-describedby="password-login-aria" id="password-login" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Identification</button>
+        <a href="#create-form" onclick="goto.bind(this)()" class="btn btn-secondary btn-lg btn-block">Je n'ai pas de compte</a>
+      </form>
+    </div>
+      <form action="/users/create" method="post" class="col-12 col-md-6 mb-5" id="create-form" style="display: none;" onsubmit="submitForm.bind(this)(event)">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" for="username-create" id="username-create-aria">username</span>
+          </div>
+          <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="username-create-aria" id="username-create" name="username">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" for="email-create" id="email-create-aria">email</span>
+          </div>
+          <input type="text" class="form-control" placeholder="email" aria-label="email" aria-describedby="email-create-aria" id="email-create" name="email">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" for="password-login" id="password-create-aria">Password</span>
+          </div>
+          <input type="password" class="form-control" placeholder="Password" aria-label="password" aria-describedby="password-create-aria" id="password-create" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Création du compte</button>
+        <a href="#login-form" onclick="goto.bind(this)()" class="btn btn-secondary btn-lg btn-block">J'ai déjà un compte</a>
+      </form>
+
+    </div>
+      </div>
+      <div class="row" style="{{ user and user._id ?: 'display:none' }}" id="tableArea">
+        <div class="col-md-6">
+          <form action="/tables" method="post" autocomplete="off" class="row" id="table-add" onsubmit="submitForm.bind(this)(event)">
+            <div class="input-group mb-3">
+              <input class="form-control" placeholder="Indiquer le nom de votre table" aria-label="Votre Message" aria-describedby="table-aria" id="table" name="table" />
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Créer table</button>
+              </div>
+            </div>
+          </form>
+          <div id="tableList" class="row"></div>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+
+{% endblock %}

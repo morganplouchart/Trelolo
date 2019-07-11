@@ -1,0 +1,51 @@
+body {
+  background: #29b6f6 !important;
+  padding: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  h1{
+    color:white;
+  }
+  a {
+    text-decoration: none;
+    color: orange;
+    padding:10px;
+    border:1px solid orange;
+  }
+
+  a:hover{
+    text-decoration: none;
+    color: white;
+    padding:10px;
+    border:1px solid white;
+  }
+
+  header {
+    box-shadow: 2px 2px 5px grey;
+    padding: 0 20px;
+    .pseudoFrame {
+      text-align: right;
+      line-height: 50px;
+    }
+  }
+  main {
+    padding: 50px;
+
+    .tweet {
+      .card-header {
+        position: relative;
+        .tweetDate {
+          position: absolute;
+          right: 5px;
+          bottom: 5px;
+          font-size: .7em;
+        }
+      }
+    }
+  }
+}
+
+
+.no-gutters {
+    background: #0086c3;
+    color:white;
+}
